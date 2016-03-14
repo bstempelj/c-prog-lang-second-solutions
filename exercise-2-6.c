@@ -1,20 +1,23 @@
-/*****************************************************************************
-Exercise 2.6: Write a function setbits(x,p,n,y) that returns x with the n bits
+/*******************************************************************************
+Exercise 2-6: Write a function setbits(x,p,n,y) that returns x with the n bits
 that begin at position p set to the rightmost n bits of y, leaving the other
 bits unchanged.
-*****************************************************************************/
+*******************************************************************************/
 
 #include <stdio.h>
 
-unsigned setbits(x, p, n, y)
+unsigned setbits(unisgned x, int p, int n, unsigned y)
 {
-    return (x >> (p+1-n) & ~0);
+  return x | ((y & ~(~0 << n)) << p);
 }
 
 int main()
 {
-    int x = 0xAB;
-    int y = 0xCE;
+  unsigned int x = 0x756;
+  unsigned int y = 0x5d7;
 
-    printf("Result: %d\n", setbits(x, 2, 3, y));
+  printf("x: %d\ny: %d\n", x, y);
+  printf("setbits: %d\n", setbits(x, 4, 3, y));
+
+  return 0;
 }
