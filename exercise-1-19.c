@@ -1,43 +1,55 @@
+/**
+ * Exercise 1-19
+ *
+ * Write a function myreverse(s) that myreverses the character
+ * string s. Use it to write a program that myreverses its
+ * input a line at a time.
+ */
 #include <stdio.h>
-#define MAXLINE 80
 
-int get_line(char s[]);
-void reverse(char s[], int l);
+#define MAXLINE 1000
+
+int mygetline(char line[], int lim);
+void myreverse(char from[], char to[], int len);
 
 int main()
 {
-    int len;
-    char line[MAXLINE];
+	int len;
+	char line[MAXLINE];
+	char rline[MAXLINE];
 
-    len = get_line(line);
-    reverse(line, len);
+	printf("> ");
+	while ((len = mygetline(line, MAXLINE)) > 0)
+	{
+		myreverse(line, rline, len);
+		printf("%s", rline);
+		printf("> ");
+	}
 
-    return 0;
+	return 0;
 }
 
-int get_line(char s[])
+int mygetline(char s[], int lim)
 {
-    int c, i;
+	int c, i;
 
-    for (i = 0; (c=getchar()) != EOF && c != '\n'; i++)
-        s[i] = c;
-    s[i] = '\0';
+	for (i=0; i<lim-1 && (c = getchar())!='\n'; ++i)
+		s[i] = c;
+	if (c == '\n')
+		s[i++] = c;
+	s[i] = '\0';
 
-    return i;
+	return i;
 }
 
-void reverse(char s[], int len)
+void myreverse(char s[], char t[], int lim)
 {
-    int i, j;
-    char ns[len];
+	int i, j;
 
-    j = 0;
-    for (i = len-1; i >= 0; i--)
-    {
-        ns[j] = s[i];
-        j++;
-    }
-    ns[j] = '\0';
-
-    printf("%s\n", ns);
+	i = lim-2;
+	j = 0;
+	while (j < lim-1)
+		t[j++] = s[i--];
+	t[j++] = '\n';
+	t[j] = '\0';
 }
