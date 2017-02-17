@@ -1,63 +1,54 @@
+/**
+ * Exercise 1-18
+ *
+ * Write a program to remove trailing blanks and tabs from
+ * each line of input, and to delete entirely blank line.
+ */
 #include <stdio.h>
-#define MAXLINE 80
 
-int get_line(char line[]);
-int get_bound(char line[], int len, int type);
+#define MAXLINE 1000
+
+int mygetline(char line[], int lim);
+int process(char line[], int len);
 
 int main()
 {
-    int i, j, len, start, end;
-    char line[MAXLINE];
-    char newline[MAXLINE];
+	int len;
+	char line[MAXLINE];
 
-    len = get_line(line);
+	printf("> ");
+	while ((len = mygetline(line, MAXLINE)) > 0)
+	{
+		len = process(line, len);
+		printf("%s", line);
+		printf("> ");
+	}
 
-    /* najdi prvo črko */
-    start = get_bound(line, len, 0);
-    /* najdi zadnjo črko */
-    end = get_bound(line, len, 1);x<
-
-    /* trim */
-    j = 0;
-    for (i = start; i <= end; i++)
-    {
-        newline[j] = line[i];
-        j++;
-    }
-    newline[j] = '\0';
-
-    printf("%s\n", newline);
-
-    return 0;
+	return 0;
 }
 
-int get_line(char line[])
+int mygetline(char s[], int lim)
 {
-    int c, i;
+	int c, i;
 
-    for (i = 0; (c=getchar()) != EOF && c != '\n'; i++)
-        line[i] = c;
-    line[i] = '\0';
+	for (i=0; i<lim-1 && (c = getchar())!=EOF && c!='\n'; ++i)
+		s[i] = c;
+	if (c == '\n')
+		s[i++] = c;
+	s[i] = '\0';
 
-    return i;
+	return i;
 }
 
-int get_bound(char line[], int len, int type)
+int process(char s[], int len)
 {
-    int i;
+	int i;
 
-    if (type == 0)
-    {
-        i = 0;
-        while (line[i] == ' ' || line[i] == '\t')
-            i++;
-    }
-    else if (type == 1)
-    {
-        i = len - 1;
-        while (line[i] == ' ' || line[i] == '\t')
-            i--;
-    }
+	i = len-2;
+	while (s[i] == ' ' || s[i] == '\t')
+		--i;
+	s[++i] = '\n';
+	s[++i] = '\0';
 
-    return i;
+	return i;
 }

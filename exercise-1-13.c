@@ -10,19 +10,19 @@
 #define SIZE 30
 #define VERT 1
 
-main()
+int main()
 {
 	int c, i, j, nc, ncmax, end;
 	int nwords[SIZE];
-	
+
 	for (i = 0; i < SIZE; ++i)
 		nwords[i] = 0;
-	
+
 	ncmax = nc = i = 0;
 	while ( ((c = getchar()) != EOF) && i < SIZE )
 	{
 		++nc;
-		
+
 		if (c == ' ' || c == '\n' || c == '\t')
 		{
 			nwords[i++] = --nc;
@@ -32,8 +32,8 @@ main()
 			nc = 0;
 		}
 	}
-	
-	end = i;	
+
+	end = i;
 	if (VERT)
 	{
 
@@ -47,9 +47,9 @@ main()
 					--nwords[i];
 				}
 				else
-					putchar(' ');			
+					putchar(' ');
 			}
-		
+
 			putchar('\n');
 			--ncmax;
 		}
@@ -63,5 +63,5 @@ main()
 			putchar('\n');
 		}
 	}
-	
+
 }

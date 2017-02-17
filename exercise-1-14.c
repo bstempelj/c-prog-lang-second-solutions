@@ -9,14 +9,14 @@
 #define SIZE 128
 #define VERT 0
 
-main()
+int main()
 {
 	int c, i, j, max;
 	int fchars[SIZE];
-	
+
 	for (i = 0; i < SIZE; ++i)
 		fchars[i] = 0;
-	
+
 	max = i = 0;
 	while ((c = getchar()) != EOF)
 	{
@@ -24,7 +24,7 @@ main()
 		if (fchars[c] > max)
 			max = fchars[c];
 	}
-	
+
 	if (VERT)
 	{
 
@@ -35,8 +35,8 @@ main()
 				if (fchars[i] >= max)
 					putchar('#');
 				else if (fchars[i] != 0)
-					putchar(' ');			
-			}		
+					putchar(' ');
+			}
 			if (max > 1)
 				putchar('\n');
 
@@ -56,5 +56,5 @@ main()
 			}
 		}
 	}
-	
+
 }
